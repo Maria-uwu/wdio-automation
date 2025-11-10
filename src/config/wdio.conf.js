@@ -54,7 +54,7 @@ exports.config = {
       args: ['--headless=new', '--disable-gpu', '--window-size=1920,1080']
     }
   },
-  /*{
+  {
   browserName: 'firefox',
   'moz:firefoxOptions': {
       args: ['-headless']
@@ -62,7 +62,7 @@ exports.config = {
   },
   {
     browserName: 'safari'
-  }*/
+  }
 ],
 
   //
@@ -221,8 +221,15 @@ exports.config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {
-  // },
+    before: async (capabilities, specs) => {
+    const browserName = (await browser.capabilities.browserName).toLowerCase();
+
+    if (browserName.includes('safari')) {
+      await browser.maximizeWindow();
+      await browser.pause(1000);
+    }
+  },
+
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name

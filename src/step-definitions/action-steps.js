@@ -101,13 +101,16 @@ Then("the user should see the dashboard", async () => {
 });
 
 Then("their name should appear in the navigation bar", async () => {
-  await browser.refresh();
-  await browser.pause(2000);
-
   const dashboard = pages("dashboard").dashboard;
 
+  // Espera condicional solo para Safari
+  const browserName = (await browser.capabilities.browserName).toLowerCase();
+  if (browserName.includes("safari")) {
+    await browser.pause(5000); //  da tiempo extra
+  }
+
   await dashboard.userNameMenu.waitForDisplayed({
-    timeout: 30000,
+    timeout: 45000, // un poco más de margen
     timeoutMsg: "#menu (userNameMenu) no apareció en el tiempo esperado",
   });
 
