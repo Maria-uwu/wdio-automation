@@ -4,6 +4,8 @@ const DashboardComponent = require('./dashboard.component');
 const ProfileComponent = require('./profile.component');
 const HomeComponent = require('./home.component');
 const ProductComponent = require('./product.component');
+const FavoritesComponent = require('./favorites.component');
+const CheckoutComponent = require('./checkout.component');
 
 
 module.exports = {
@@ -12,5 +14,7 @@ module.exports = {
     DashboardComponent,
     ProfileComponent,
     HomeComponent,
-    ProductComponent
+    ProductComponent,
+    FavoritesComponent,
+    CheckoutComponent
 }

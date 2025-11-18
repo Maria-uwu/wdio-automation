@@ -4,10 +4,12 @@ const DashboardPage = require('./dashboard.page');
 const ProfilePage = require('./profile.page');
 const HomePage = require('./home.page');
 const ProductPage = require('./product.page');
+const FavoritesPage = require('./favorites.page');
+const CheckoutPage = require('./checkout.page');
 
 /**
- * @param name {'signup | login | dashboard | profile | home | product'}  
- * @returns {SignupPage | LoginPage | DashboardPage | ProfilePage | HomePage | ProductPage}
+ * @param name {'signup | login | dashboard | profile | home | product | favorites | checkout'}  
+ * @returns {SignupPage | LoginPage | DashboardPage | ProfilePage | HomePage | ProductPage | FavoritesPage | CheckoutPage}
  */
 
 function pages (name){
@@ -18,6 +20,9 @@ function pages (name){
          profile: new ProfilePage(),
          home: new HomePage(),
          product: new ProductPage(),
+         favorites: new FavoritesPage(),
+         checkout: new CheckoutPage(),
+
      }
      return items[name.toLowerCase()];
 }
@@ -29,5 +34,6 @@ module.exports = {
     ProfilePage,
     HomePage,
     ProductPage,
+    CheckoutPage,
     pages, 
 }

@@ -1,4 +1,4 @@
-const { SignupComponent, LoginComponent, DashboardComponent, ProfileComponent, HomeComponent, ProductComponent } = require("../components");
+const { SignupComponent, LoginComponent, DashboardComponent, ProfileComponent, HomeComponent, ProductComponent, FavoritesComponent, CheckoutComponent } = require("../components");
 
 class BasePage{
     constructor(url){
@@ -9,6 +9,9 @@ class BasePage{
         this.profile = new ProfileComponent();
         this.home = new HomeComponent();
         this.product = new ProductComponent();
+        this.favorites = new FavoritesComponent();
+        this.checkout = new CheckoutComponent();
+        
 
     }
     open(){

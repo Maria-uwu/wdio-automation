@@ -50,11 +50,11 @@ exports.config = {
   capabilities: [
   {
     browserName: 'chrome',
-    'goog:chromeOptions': {
-      args: ['--headless=new', '--disable-gpu', '--window-size=1920,1080']
-    }
+   'goog:chromeOptions': {
+   args: ['--headless=new', '--disable-gpu', '--window-size=1920,1080']
+   }
   },
-  {
+{
   browserName: 'firefox',
   'moz:firefoxOptions': {
       args: ['-headless']
@@ -106,7 +106,7 @@ exports.config = {
   connectionRetryTimeout: 120000,
   //
   // Default request retries count
-  connectionRetryCount: 3,
+  //connectionRetryCount: 3,
   //
   // Test runner services
   // Services take over a specific job you don't want to take care of. They enhance
@@ -124,7 +124,7 @@ exports.config = {
 
   //
   // The number of times to retry the entire specfile when it fails as a whole
-  specFileRetries: 2,
+  //specFileRetries: 2,
   //
   // Delay in seconds between the spec file retry attempts
   specFileRetriesDelay: 0,

@@ -1,35 +1,39 @@
 const BaseComponent = require("./base.component");
 
-class ProfileComponent extends BaseComponent{
-    constructor(){
-        super('body');
-    }
-    get updateBtn(){
-        return $('[data-test="update-profile-submit"]')
-    }
-    get successMsg(){
-        return $('.alert.alert-success.mt-3')
-    }
+class ProfileComponent extends BaseComponent {
+  constructor() {
+    super("body");
+  }
+  get updateBtn() {
+    return $('[data-test="update-profile-submit"]');
+  }
+  get successMsg() {
+    return $(".alert.alert-success.mt-3");
+  }
 
-    /**
-     * @param name {'username' | 'password'}  
-     * @returns 
-     */
+  /**
+   * @param name {'username' | 'password'}
+   * @returns
+   */
 
-    input(name){
-        const selectors = {
-            firstName: '#first_name',
-            lastName: '#last_name',
-            email: '#email',
-            phone: '#phone',
-            street: '#street',
-            postalCode: '#postal_code',
-            city: '#city',
-            state: '#state',
-            country: '#country',
-        };
-        return this.rootEl.$(selectors[name]); 
-    }
+  input(name) {
+    const selectors = {
+      firstName: "#first_name",
+      lastName: "#last_name",
+      email: "#email",
+      phone: "#phone",
+      street: "#street",
+      postalCode: "#postal_code",
+      city: "#city",
+      state: "#state",
+      country: "#country",
+    };
+    return this.rootEl.$(selectors[name]);
+  }
+  async clickSave() {
+    await this.updateBtn.waitForClickable({ timeout: 5000 });
+    await this.updateBtn.click();
+  }
 }
 
-module.exports = ProfileComponent; 
+module.exports = ProfileComponent;
