@@ -9,7 +9,7 @@ class LoginPage extends BasePage {
   async waitUntilLoaded() {
     await this.loginComponent.rootEl.waitForDisplayed({
       timeout: 10000,
-      timeoutMsg: "Login page did not load in time"
+      timeoutMsg: "Login page did not load in time",
     });
   }
 

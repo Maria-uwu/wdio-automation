@@ -1,12 +1,11 @@
 const BasePage = require("./base.page");
-const { CheckoutComponent } = require('../components');
+const { CheckoutComponent } = require("../components");
 
-class CheckoutPage extends BasePage{
-    
-    constructor(){
-        super('/checkout');
-        this.checkoutComponent = new CheckoutComponent();
-    }
+class CheckoutPage extends BasePage {
+  constructor() {
+    super("/checkout");
+    this.checkoutComponent = new CheckoutComponent();
+  }
 }
 
 module.exports = CheckoutPage;

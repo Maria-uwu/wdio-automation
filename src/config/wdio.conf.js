@@ -20,7 +20,7 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["../features/**/*.feature"],
+  specs: ["../features/signup.feature", "../features/**/*.feature"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -41,19 +41,19 @@ exports.config = {
   // and 30 processes will get spawned. The property handles how many capabilities
   // from the same test should run tests.
   //
-  maxInstances: 2,
+  maxInstances: 1,
   //
   // If you have trouble getting all important capabilities together, check out the
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
   //
   capabilities: [
-  {
-    browserName: 'chrome',
-   'goog:chromeOptions': {
-   args: ['--headless=new', '--disable-gpu', '--window-size=1920,1080']
-   }
-  },
+    {
+      browserName: "chrome",
+      "goog:chromeOptions": {
+        args: ["--headless=new", "--disable-gpu", "--window-size=1920,1080"],
+      },
+    } /*
 {
   browserName: 'firefox',
   'moz:firefoxOptions': {
@@ -62,8 +62,8 @@ exports.config = {
   },
   {
     browserName: 'safari'
-  }
-],
+  }*/,
+  ],
 
   //
   // ===================
@@ -144,7 +144,7 @@ exports.config = {
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features
-    require: ["./src/step-definitions/*steps.js"],
+    require: ["./src/step-definitions/**/*.js"],
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -221,10 +221,10 @@ exports.config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-    before: async (capabilities, specs) => {
+  before: async (capabilities, specs) => {
     const browserName = (await browser.capabilities.browserName).toLowerCase();
 
-    if (browserName.includes('safari')) {
+    if (browserName.includes("safari")) {
       await browser.maximizeWindow();
       await browser.pause(1000);
     }

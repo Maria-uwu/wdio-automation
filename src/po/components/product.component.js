@@ -13,10 +13,6 @@ class ProductComponent extends BaseComponent {
     return $('[data-test="add-to-favorites"]');
   }
 
-  get carQuantityNumber() {
-    return $('[data-test="cart-quantity"]');
-  }
-
   get toastMessage() {
     return $("#toast-container");
   }
