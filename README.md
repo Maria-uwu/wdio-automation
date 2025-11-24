@@ -12,7 +12,7 @@ npm install
 
 2️⃣ Run all tests in headless mode
 
-npx wdio run ./src/config/wdio.conf.js
+npx wdio run ./src/core/config/wdio.conf.js 
 
 
 ⚙️ Features
