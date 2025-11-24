@@ -3,11 +3,11 @@ import { expect as wdioExpect } from "@wdio/globals";
 const chai = require("chai"); // 👈 100% compatible
 const { expect, assert } = chai;
 chai.should();
-const { pages } = require("../po/pages");
-const { testData, generateRandomEmail } = require("../utils/testData");
+const { pages } = require("../../business/pages");
+const { testData, generateRandomEmail } = require("../../core/utils/testData");
 const fs = require("fs");
 const path = require("path");
-const sessionDataPath = path.join(__dirname, "../utils/sessionData.json");
+const sessionDataPath = path.join(__dirname, "../../core/utils/sessionData.json");
 
 When("clicks the {string} button", async (buttonText) => {
   const actions = {
