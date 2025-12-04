@@ -1,4 +1,8 @@
 const path = require("path");
+const { ReportAggregator } = require("wdio-html-nice-reporter");
+
+let reportAggregator;
+
 exports.config = {
   //
   // ====================
@@ -21,7 +25,10 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ["../../test/features/signup.feature", "../../test/features/**/*.feature"],
+  specs: [
+    "../../test/features/signup.feature",
+    "../../test/features/**/*.feature",
+  ],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -136,7 +143,22 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: [
+    "spec",
+    [
+      "html-nice",
+      {
+        debug: false,
+        outputDir: "./reports/html-reports/",
+        filename: "report.html",
+        reportTitle: "Web Test Report",
+        showInBrowser: false,
+        linkScreenshots: true,
+        collapseTests: false,
+        useOnAfterCommandForScreenshot: true,
+      },
+    ],
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -145,7 +167,7 @@ exports.config = {
   // If you are using Cucumber you need to specify the location of your step definitions.
   cucumberOpts: {
     // <string[]> (file/dir) require files before executing features
-    require: [path.resolve(__dirname, "../../test/step-definitions/**/*.js")],//["../../test/step-definitions/**/*.js"],
+    require: [path.resolve(__dirname, "../../test/step-definitions/**/*.js")], //["../../test/step-definitions/**/*.js"],
     // <boolean> show full backtrace for errors
     backtrace: false,
     // <string[]> ("extension:module") require files with the given EXTENSION after requiring MODULE (repeatable)
@@ -183,8 +205,14 @@ exports.config = {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: function () {
+    reportAggregator = new ReportAggregator({
+      outputDir: "./reports/html-reports/",
+      filename: "master-report.html",
+      reportTitle: "Web Test Report",
+    });
+    reportAggregator.clean();
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -271,8 +299,11 @@ exports.config = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-  // },
+  afterStep: async function (step, context, { error }) {
+    if (error) {
+      await browser.takeScreenshot();
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
@@ -314,8 +345,9 @@ exports.config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: async function () {
+    await reportAggregator.createReport();
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

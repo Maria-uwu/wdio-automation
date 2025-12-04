@@ -17,3 +17,9 @@ Thumbs.db
 allure-report/
 allure-results/
 logs/
+reports/
+allure-results/
+allure-report/
+html-report/
+*.html
+
